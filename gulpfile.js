@@ -36,3 +36,9 @@ gulp.task('html', function () {
 });
 
 gulp.task('default', ['css', 'js', 'html'], function () {});
+
+gulp.task('watch', function () {
+    gulp.watch('src/index.html', ['html']);
+    gulp.watch('src/style.scss', ['css']);
+    gulp.watch('src/main.js',['js']);
+});
