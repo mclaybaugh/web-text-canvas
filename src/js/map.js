@@ -8,14 +8,13 @@ class GameField {
     }
 
     get content_string () {
-        /*var content = '';
+        var content = '';
         for (var i in this.content) {
             for (var j in this.content[i]) {
                 content += this.content[i][j];
             }
         }
-        return content;*/
-        return this.content.reduce((content, val) => { console.log(val); return content + val})
+        return content;
     }
 }
 export { GameField }
