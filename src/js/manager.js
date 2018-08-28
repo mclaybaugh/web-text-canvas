@@ -20,7 +20,9 @@ class Manager {
 
         //      FIRST DRAW
         // contentString <- window <- actors <- map
-        
+        var gameWindow = document.getElementById('game-window')
+        gameWindow.innerText = this.map.contentString
+
         //  SETUP INPUT CONTROLS
         //document.addEventListener('keydown', this.inputHandler, true)
             
