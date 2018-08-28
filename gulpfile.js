@@ -20,7 +20,7 @@ gulp.task('css', function () {
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('js', function () {
@@ -36,7 +36,7 @@ gulp.task('js', function () {
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest('dist'))
 });
 
 gulp.task('html', function () {
