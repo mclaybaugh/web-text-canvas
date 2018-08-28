@@ -8,6 +8,10 @@
   },
   "author": "Michael Claybaugh",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/mclaybaugh/web-text-game"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0-rc.4",
