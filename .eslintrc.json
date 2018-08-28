@@ -11,6 +11,7 @@
     "rules": {
         "indent": ["error", 4],
         "quotes": ["warn", "single"],
+        "semi": ["error", "always"],
         "no-undef": "warn"
     }
 }

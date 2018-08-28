@@ -5,9 +5,9 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var del = require('del');
 var browserify = require('browserify');
-var babelify = require('babelify')
-var source = require('vinyl-source-stream')
-var streamify = require('gulp-streamify')
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
+var streamify = require('gulp-streamify');
 
 gulp.task('clean', function () {
     return del(['dist']);
@@ -36,7 +36,7 @@ gulp.task('js', function () {
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('html', function () {

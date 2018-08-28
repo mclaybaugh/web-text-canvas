@@ -1,9 +1,9 @@
 class Map {
     constructor (char, width, height) {
-        this.bg_char = char
-        this.width = width
-        this.height = height
-        this.content = initArray(this.height, this.width, this.bg_char)
+        this.bg_char = char;
+        this.width = width;
+        this.height = height;
+        this.content = initArray(this.height, this.width, this.bg_char);
     }
 
     get contentString () {
@@ -19,41 +19,41 @@ class Map {
 
 class MapChar {
     constructor (char, color) {
-        this.char = char
-        this.color = color
+        this.char = char;
+        this.color = color;
     }
 }
 
 class Coord {
     constructor (x = 0, y = 0) {
-        this.x = x
-        this.y = y
+        this.x = x;
+        this.y = y;
     }
 }
 class Actor {
     constructor (mapChar, coord) {
-        this.MapChar = mapChar
-        this.coord = coord
+        this.MapChar = mapChar;
+        this.coord = coord;
     }
 }
 
 class Window {
     constructor (coord, width, height) {
-        this.coord = coord
-        this.width = width
-        this.height = height
+        this.coord = coord;
+        this.width = width;
+        this.height = height;
     }
 }
 
-export { Map, MapChar, Coord, Actor, Window }
+export { Map, MapChar, Coord, Actor, Window };
 
 function initArray(inHeight, inWidth, inChar) {
-    var newArray = []
+    var newArray = [];
     for (var i = 0; i < inHeight; i++) {
-        newArray[i] = []
+        newArray[i] = [];
         for (var j = 0; j < inWidth; j++) {
-            newArray[i][j] = inChar
+            newArray[i][j] = inChar;
         }
     }
-    return newArray
+    return newArray;
 }
