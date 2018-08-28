@@ -1,32 +1,4 @@
-class GameField {
-    constructor (inHero, inChar, inWidth, inHeight) {
-        this.hero = inHero;
-        this.bg_char = inChar;
-        this.width = inWidth;
-        this.height = inHeight;
-        this.content = setContent(this.height, this.width, this.bg_char);
-    }
-    get content_string () {
-        var content = '';
-        for (var i in this.content) {
-            for (var j in this.content[i]) {
-                content += this.content[i][j];
-            }
-        }
-        return content;
-    }
-}
-
-function setContent(inHeight, inWidth, inChar) {
-    var newArray = [];
-    for (var i = 0; i < inHeight; i++) {
-        newArray[i] = [];
-        for (var j = 0; j < inWidth; j++) {
-            newArray[i][j] = inChar;
-        }
-    }
-    return newArray;
-}
+import { GameField } from './map'
 
 // 27 rows, 99 columns
 var main_screen = new GameField('A', '-', 27, 99);
