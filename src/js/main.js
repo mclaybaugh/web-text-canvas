@@ -1,4 +1,6 @@
-import { Manager } from './map'
+import { Manager } from './manager'
 
-// 26 rows, 99 columns
-var manager = new Manager('-', 99, 26, 'A', 'green', 'hero')
+window.onload = function () {
+    // 26 rows, 99 columns
+    var manager = new Manager('-', 99, 26, 'A', 'green', 'hero')
+}
