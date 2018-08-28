@@ -23,3 +23,11 @@ gulp clean
 # update build when files are saved
 gulp watch
 ```
+
+## TODO
+
+1. Setup project to use TypeScript
+2. Update Draw to integrate
+    1. actors
+    2. window
+3. Setup game loop and basic movement controls
