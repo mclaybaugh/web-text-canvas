@@ -1,9 +1,8 @@
-class GameField {
-    constructor (inHero, inChar, inWidth, inHeight) {
-        this.hero = inHero
-        this.bg_char = inChar
-        this.width = inWidth
-        this.height = inHeight
+class Map {
+    constructor (char, width, height) {
+        this.bg_char = char
+        this.width = width
+        this.height = height
         this.content = initArray(this.height, this.width, this.bg_char)
     }
 
@@ -17,7 +16,36 @@ class GameField {
         return content;
     }
 }
-export { GameField }
+
+class MapChar {
+    constructor (char, color) {
+        this.char = char
+        this.color = color
+    }
+}
+
+class Coord {
+    constructor (x = 0, y = 0) {
+        this.x = x
+        this.y = y
+    }
+}
+class Actor {
+    constructor (mapChar, coord) {
+        this.MapChar = mapChar
+        this.coord = coord
+    }
+}
+
+class Window {
+    constructor (coord, width, height) {
+        this.coord = coord
+        this.width = width
+        this.height = height
+    }
+}
+
+export { Map, MapChar, Coord, Actor, Window }
 
 function initArray(inHeight, inWidth, inChar) {
     var newArray = []
