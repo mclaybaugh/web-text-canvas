@@ -1,7 +1,7 @@
-import { GameField } from './map'
+import { Manager } from './map'
 
 // 26 rows, 99 columns
-var main_screen = new GameField('A', '-', 26, 99)
+var main_screen = new Manager('-', 99, 26, 'A', 'green')
 
 function draw_window () {
     document.getElementById('game-window').innerText = main_screen.content_string
