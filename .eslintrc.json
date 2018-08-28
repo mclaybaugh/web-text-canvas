@@ -5,12 +5,12 @@
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 6
+        "ecmaVersion": 6,
+        "sourceType": "module"
     },
     "rules": {
         "indent": ["error", 4],
         "quotes": ["warn", "single"],
-        "semi": ["error", "always"],
         "no-undef": "warn"
     }
 }
