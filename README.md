@@ -6,23 +6,20 @@ as its art assets.
 ## Developers
 
 Javascript is processed by browserify and babel to enable the usage
-es6 and modules, then minified. CSS is process by sass, then minified.
+of es6 and modules, then minified. CSS is process by sass, then minified.
 
 Use npm to set up project and gulp to run tasks.
 
-1. Install dev dependencies:
-    ```bash
-    npm install
-    ```
-2. Build
-    ```bash
-    gulp
-    ```
-3. Update build while working
-    ```bash
-    gulp watch
-    ```
-4. Clean dist directory
-    ```bash
-    gulp clean
-    ```
+```bash
+# install dev dependencies
+npm install
+
+# build project in dist/
+gulp
+
+# delete dist/ and all contents
+gulp clean
+
+# update build when files are saved
+gulp watch
+```
