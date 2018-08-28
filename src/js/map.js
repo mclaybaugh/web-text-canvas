@@ -6,7 +6,7 @@ class Map {
         this.content = initArray(this.height, this.width, this.bg_char)
     }
 
-    get content_string () {
+    get contentString () {
         var content = '';
         for (var i in this.content) {
             for (var j in this.content[i]) {
