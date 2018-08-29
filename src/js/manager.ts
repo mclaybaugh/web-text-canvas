@@ -6,7 +6,7 @@ class Manager {
     window: Window;
     gameHero: Actor;
 
-    constructor (char: string, width: number, height: number, heroChar: string, heroColor: string, heroName: string) {
+    constructor (char: string, width: number, height: number, heroChar: string, heroColor: string) {
         // make map and window with same dimensions for now
         //  SETUP
         //      MAP

@@ -1,7 +1,7 @@
 class Map {
-    bg_char: any;
-    width: any;
-    height: any;
+    bg_char: string;
+    width: number;
+    height: number;
     content: any[];
     constructor (char: string, width: number, height: number) {
         this.bg_char = char;
@@ -22,8 +22,8 @@ class Map {
 }
 
 class MapChar {
-    char: any;
-    color: any;
+    char: string;
+    color: string;
     constructor (char: string, color: string) {
         this.char = char;
         this.color = color;
@@ -39,18 +39,18 @@ class Coord {
     }
 }
 class Actor {
-    MapChar: any;
-    coord: any;
+    mapChar: MapChar;
+    coord: Coord;
     constructor (mapChar: MapChar, coord: Coord) {
-        this.MapChar = mapChar;
+        this.mapChar = mapChar;
         this.coord = coord;
     }
 }
 
 class Window {
-    coord: any;
-    width: any;
-    height: any;
+    coord: Coord;
+    width: number;
+    height: number;
     constructor (coord: Coord, width: number, height: number) {
         this.coord = coord;
         this.width = width;
@@ -60,11 +60,11 @@ class Window {
 
 export { Map, MapChar, Coord, Actor, Window };
 
-function initArray(inHeight: any, inWidth: any, inChar: any): any[] {
+function initArray(height: number, width: number, inChar: any): any[] {
     var newArray = [];
-    for (var i = 0; i < inHeight; i++) {
+    for (var i = 0; i < height; i++) {
         newArray[i] = [];
-        for (var j = 0; j < inWidth; j++) {
+        for (var j = 0; j < width; j++) {
             newArray[i][j] = inChar;
         }
     }
