@@ -31,3 +31,4 @@ gulp watch
     1. actors
     2. window
 3. Setup game loop and basic movement controls
+4. Perhaps migrate bulk of game logic to Rust and WebAssembly
