@@ -33,7 +33,7 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', function() {
+gulp.task('scripts_uglify', function() {
     return browserify({
         entries: ['./src/main.ts', './src/map.ts', './src/manager.ts']
     })
@@ -53,3 +53,5 @@ gulp.task('html', function () {
 });
 
 gulp.task('default', ['styles', 'scripts', 'html'], function () {});
+
+gulp.task('build', ['styles', 'scripts_uglify', 'html'], function () {});
