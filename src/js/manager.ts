@@ -1,7 +1,12 @@
-import { Map, MapChar, Coord, Actor, Window } from './map.js';
+import { Map, MapChar, Coord, Actor, Window } from './map';
 
 class Manager {
-    constructor (char, width, height, heroChar, heroColor, heroName) {
+    map: Map;
+    gameObjects: any[];
+    window: Window;
+    gameHero: Actor;
+
+    constructor (char: string, width: number, height: number, heroChar: string, heroColor: string, heroName: string) {
         // make map and window with same dimensions for now
         //  SETUP
         //      MAP
@@ -9,8 +14,7 @@ class Manager {
 
         //      GAME_OBJECTS
         //          HERO
-        this.gameObjects = [];
-        this.gameObjects[heroName] = new Actor(
+        this.gameHero = new Actor(
             new MapChar(heroChar, heroColor), 
             new Coord()
         );
@@ -31,7 +35,7 @@ class Manager {
         //      DRAW
     }
 
-    inputHandler (event) {
+    inputHandler (event: { defaultPrevented: any; which: any; preventDefault: () => void; }) {
         if (event.defaultPrevented) {
             return; // Do nothing if the event was already processed
         }

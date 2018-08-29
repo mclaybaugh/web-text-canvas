@@ -26,9 +26,13 @@ gulp watch
 
 ## TODO
 
-1. Setup project to use TypeScript
-2. Update Draw to integrate
+1. ~~Perhaps migrate bulk of game logic to Rust and WebAssembly~~
+    1. Moving to Rust has been postponed following multiple
+       compilation errors encountered. These errors occurred when
+       installing rust-generate, rust-bindgen, and the RLS.
+       The error gave a message about the linker missing "lz"
+2. Setup project to use TypeScript
+3. Update Draw to integrate
     1. actors
     2. window
-3. Setup game loop and basic movement controls
-4. Perhaps migrate bulk of game logic to Rust and WebAssembly
+4. Setup game loop and basic movement controls

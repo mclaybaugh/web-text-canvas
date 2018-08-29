@@ -8,6 +8,7 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var streamify = require('gulp-streamify');
+var tsify = require('tsify');
 
 gulp.task('clean', function () {
     return del(['dist']);
@@ -25,8 +26,9 @@ gulp.task('css', function () {
 
 gulp.task('js', function () {
     return browserify({
-        entries: ['./src/js/main.js', './src/js/map.js']
+        entries: ['./src/js/main.ts', './src/js/map.ts', './src/js/manager.ts']
     })
+        .plugin(tsify)
         .transform(babelify.configure({
             presets : ['@babel/preset-env']
         }))
