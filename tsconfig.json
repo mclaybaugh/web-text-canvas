@@ -1,8 +1,8 @@
 {
     "files": [
-        "src/js/main.ts",
-        "src/js/manager.ts",
-        "src/js/map.tx"
+        "src/main.ts",
+        "src/manager.ts",
+        "src/map.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": true,

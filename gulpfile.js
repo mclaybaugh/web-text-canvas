@@ -26,7 +26,7 @@ gulp.task('css', function () {
 
 gulp.task('js', function () {
     return browserify({
-        entries: ['./src/js/main.ts', './src/js/map.ts', './src/js/manager.ts']
+        entries: ['./src/main.ts', './src/map.ts', './src/manager.ts']
     })
         .plugin(tsify)
         .transform(babelify.configure({
