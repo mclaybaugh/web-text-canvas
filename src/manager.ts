@@ -1,31 +1,35 @@
-import { Map, MapChar, Coord, Actor, Window } from './map';
+import { MapChar, Coord, Actor, Window } from './classes';
+import { FuncMap } from './functionalMap';
 
 class Manager {
-    map: Map;
+    map: any[];
     gameObjects: any[];
     window: Window;
     gameHero: Actor;
 
-    constructor (char: string, width: number, height: number, heroChar: string, heroColor: string) {
-        // make map and window with same dimensions for now
-        //  SETUP
-        //      MAP
-        this.map = new Map(char, width, height);
+    constructor (
+        windowId: string,
+        rows: number, columns: number, char: string,
+        heroChar: string, heroColor: string) {
 
-        //      GAME_OBJECTS
-        //          HERO
+        // make map and window with same dimensions for now
+        this.map = FuncMap(rows, columns, char);
+        //this.window = new Window(new Coord(), width, height);
+
+        // GAME_OBJECTS
         this.gameHero = new Actor(
             new MapChar(heroChar, heroColor), 
             new Coord()
         );
 
-        //      WINDOW
-        this.window = new Window(new Coord(), width, height);
-
-        //      FIRST DRAW
+        // FIRST DRAW
         // contentString <- window <- actors <- map
-        var gameWindow = document.getElementById('game-window');
-        gameWindow.innerText = this.map.contentString;
+        var gameWindow = document.getElementById(windowId);
+        gameWindow.innerText = this.map.reduce((acc: string, val: string[]) => {
+            return acc + val.reduce((iacc: string, ival: string) => {
+                return iacc + ival;
+            });
+        }, '');
 
         //  SETUP INPUT CONTROLS
         //document.addEventListener('keydown', this.inputHandler, true)

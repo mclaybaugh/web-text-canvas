@@ -2,7 +2,8 @@
     "files": [
         "src/main.ts",
         "src/manager.ts",
-        "src/map.ts"
+        "src/classes.ts",
+        "src/functionalMap.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": true,

@@ -23,6 +23,9 @@ gulp build
 
 ## TODO
 
+I am currently working on migrating some my the object oriented pieces
+to a more functional style.
+
 1. Update Draw to integrate
     1. actors
     2. window
