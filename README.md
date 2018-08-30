@@ -26,7 +26,7 @@ gulp build
 I am currently working on migrating some my the object oriented pieces
 to a more functional style.
 
-1. Update Draw to integrate
-    1. actors
-    2. window
-2. Setup game loop and basic movement controls
+1. Game loop and basic movement controls
+2. Color output with spans and classes
+3. Animations on background
+4. Additional implementation in Rust/WebAssembly
