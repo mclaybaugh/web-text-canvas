@@ -1,5 +1,13 @@
-import { MapChar, Coord, Actor, Window } from './classes';
+import { MapChar, Coord, MapObject, Window } from './classes';
 import { FuncMap } from './functionalMap';
+
+const WHITE: string = 'white';
+const RED: string = 'red';
+const BLUE: string = 'blue';
+const GREEN: string = 'green';
+const YELLOW: string = 'yellow';
+const ORANGE: string = 'orange';
+const PURPLE: string = 'purple';
 
 window.onload = function () {
     // Configuration vars
@@ -7,8 +15,8 @@ window.onload = function () {
     let rows: number = 26;
     let columns: number = 99;
     let bgChar: string = '-';
-    let heroChar: string = 'A';
-    let heroColor: string = 'green';
+    let heroChar: string = '@';
+    let heroColor: string = GREEN;
 
     // Interesting logic here
     // make map and window with same dimensions for now
@@ -16,17 +24,19 @@ window.onload = function () {
     //this.window = new Window(new Coord(), width, height);
 
     // GAME_OBJECTS
-    let gameHero = new Actor(
+    let gameObjects: MapObject[] = [];
+    gameObjects.push(new MapObject(
         new MapChar(heroChar, heroColor), 
-        new Coord()
-    );
+        new Coord(10, 10)
+    ));
 
     // FIRST DRAW
-    // contentString <- window <- actors <- map
-    var gameWindow = document.getElementById(windowId);
-    gameWindow.innerText = map.reduce((acc: string, val: MapChar) => {
-        return acc + val.char;
-    }, '');
+    // contentString <- window <- objects <- map
+    let gameWindow = document.getElementById(windowId);
+    gameWindow.innerText = applyObjects(map, gameObjects)
+        .reduce((acc: string, val: MapChar) => {
+            return acc + val.char;
+        }, '');
 
     //  SETUP INPUT CONTROLS
     //document.addEventListener('keydown', this.inputHandler, true)
@@ -35,6 +45,14 @@ window.onload = function () {
     //      UPDATE
     //      DRAW
 };
+
+function applyObjects (map: MapChar[], gameObjects: MapObject[]): MapChar[] {
+    // for each gameObject, place into map at object coord
+    for (let i in gameObjects) {
+        map[gameObjects[i].coord.x * gameObjects[i].coord.y] = gameObjects[i].mapChar;
+    }
+    return map;
+}
 
 function inputHandler (event: {defaultPrevented: any; which: any; 
     preventDefault: () => void; }) {
