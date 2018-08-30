@@ -27,7 +27,7 @@ window.onload = function () {
     let gameObjects: MapObject[] = [];
     gameObjects.push(new MapObject(
         new MapChar(heroChar, heroColor), 
-        new Coord(10, 10)
+        new Coord()
     ));
 
     // FIRST DRAW
