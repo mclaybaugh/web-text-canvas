@@ -9,17 +9,17 @@ class MapChar {
 }
 
 class Coord {
-    private x: number;
-    private y: number;
+    public x: number;
+    public y: number;
 
     constructor (x = 0, y = 0) {
         this.x = x;
         this.y = y;
     }
 }
-class Actor {
-    private mapChar: MapChar;
-    private coord: Coord;
+class MapObject {
+    public mapChar: MapChar;
+    public coord: Coord;
 
     constructor (mapChar: MapChar, coord: Coord) {
         this.mapChar = mapChar;
@@ -28,9 +28,9 @@ class Actor {
 }
 
 class Window {
-    private coord: Coord;
-    private width: number;
-    private height: number;
+    public coord: Coord;
+    public width: number;
+    public height: number;
 
     constructor (coord: Coord, width: number, height: number) {
         this.coord = coord;
@@ -39,4 +39,4 @@ class Window {
     }
 }
 
-export { MapChar, Coord, Actor, Window };
+export { MapChar, Coord, MapObject, Window };
