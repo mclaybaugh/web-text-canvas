@@ -1,6 +1,6 @@
 class MapChar {
-    private char: string;
-    private color: string;
+    public char: string;
+    public color: string;
 
     constructor (char: string, color: string = 'default') {
         this.char = char;

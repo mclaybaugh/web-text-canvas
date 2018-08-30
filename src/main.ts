@@ -12,7 +12,7 @@ window.onload = function () {
 
     // Interesting logic here
     // make map and window with same dimensions for now
-    let map = FuncMap(rows, columns, bgChar);
+    let map: MapChar[] = FuncMap(rows, columns, bgChar);
     //this.window = new Window(new Coord(), width, height);
 
     // GAME_OBJECTS
@@ -24,10 +24,8 @@ window.onload = function () {
     // FIRST DRAW
     // contentString <- window <- actors <- map
     var gameWindow = document.getElementById(windowId);
-    gameWindow.innerText = map.reduce((acc: string, val: string[]) => {
-        return acc + val.reduce((iacc: string, ival: string) => {
-            return iacc + ival;
-        });
+    gameWindow.innerText = map.reduce((acc: string, val: MapChar) => {
+        return acc + val.char;
     }, '');
 
     //  SETUP INPUT CONTROLS
@@ -40,7 +38,7 @@ window.onload = function () {
 
 function inputHandler (event: {defaultPrevented: any; which: any; 
     preventDefault: () => void; }) {
-        
+
     if (event.defaultPrevented) {
         return; // Do nothing if the event was already processed
     }
