@@ -1,7 +1,6 @@
 {
     "files": [
         "src/main.ts",
-        "src/manager.ts",
         "src/classes.ts",
         "src/functionalMap.ts"
     ],
