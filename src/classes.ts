@@ -1,20 +1,8 @@
-
-function initArray(height: number, width: number, inChar: any): any[] {
-    var newArray = [];
-    for (var i = 0; i < height; i++) {
-        newArray[i] = [];
-        for (var j = 0; j < width; j++) {
-            newArray[i][j] = inChar;
-        }
-    }
-    return newArray;
-}
-
 class MapChar {
     private char: string;
     private color: string;
 
-    constructor (char: string, color: string) {
+    constructor (char: string, color: string = 'default') {
         this.char = char;
         this.color = color;
     }
