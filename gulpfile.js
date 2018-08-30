@@ -22,7 +22,7 @@ gulp.task('styles', function () {
 
 gulp.task('scripts', function () {
     return browserify({
-        entries: ['./src/main.ts', './src/classes.ts', './src/manager.ts', 'src/functionalMap.ts']
+        entries: ['./src/main.ts', './src/classes.ts', 'src/functionalMap.ts']
     })
         .plugin(tsify)
         .transform(babelify.configure({
@@ -35,7 +35,7 @@ gulp.task('scripts', function () {
 
 gulp.task('scripts_uglify', function() {
     return browserify({
-        entries: ['./src/main.ts', './src/classes.ts', './src/manager.ts', 'src/functionalMap.ts']
+        entries: ['./src/main.ts', './src/classes.ts', 'src/functionalMap.ts']
     })
         .plugin(tsify)
         .transform(babelify.configure({
