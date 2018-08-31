@@ -28,6 +28,7 @@ window.onload = function () {
         switch (event.which) {
         case 40: // down arrow
         case 74: // j
+        case 83: // s
             if (objectCoords[1] < ROWS) {
                 objectCoords[1]++;
             }
@@ -35,6 +36,7 @@ window.onload = function () {
             break;
         case 38: // up arrow
         case 75: // k
+        case 87: // w
             if (objectCoords[1] > 0) {
                 objectCoords[1]--;
             }
@@ -42,6 +44,7 @@ window.onload = function () {
             break;
         case 37: // left arrow
         case 72: // h
+        case 65: // a
             if (objectCoords[0] > 0) {
                 objectCoords[0]--;
             }
@@ -49,6 +52,7 @@ window.onload = function () {
             break;
         case 39: // right arrow
         case 76: // l
+        case 68: // d
             if (objectCoords[0] < COLUMNS) {
                 objectCoords[0]++;
             }
