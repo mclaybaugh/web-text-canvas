@@ -17,6 +17,7 @@ window.onload = function () {
     const map: string[] = makeMap(COLUMNS, ROWS, bgChar);
     let objectChars: string[] = [heroChar];
     let objectCoords: number[] = [0,0];
+
     draw(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
 
     document.addEventListener('keydown', function keyHandler (event: any) {
@@ -90,7 +91,7 @@ function applyObjects (map: string[], cols: number,
     return newMap;
 }
 
-/* Dependencies: function applyObjects */
+/* Dependencies: applyObjects */
 function draw (windowId: string, map: string[], cols: number ,
     objectChars: string[], objectCoords: number[]): void {
     // contentString <- window <- objects <- map
