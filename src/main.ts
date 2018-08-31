@@ -1,7 +1,3 @@
-const WINDOW_ID: string = 'game_window';
-const COLUMNS: number = 99;
-const ROWS: number = 26;
-
 /* Colors are not used yet
 const WHITE: string = 'white';
 const RED: string = 'red';
@@ -13,12 +9,15 @@ const PURPLE: string = 'purple';
 */
 
 window.onload = function () {
-    let bgChar: string = '-';
-    let heroChar: string = '@';
-    let map: string[] = makeMap(COLUMNS, ROWS, bgChar);
+    const WINDOW_ID: string = 'game_window';
+    const COLUMNS: number = 99;
+    const ROWS: number = 26;
+    const bgChar: string = '-';
+    const heroChar: string = '@';
+    const map: string[] = makeMap(COLUMNS, ROWS, bgChar);
     let objectChars: string[] = [heroChar];
     let objectCoords: number[] = [0,0];
-    draw(map, objectChars, objectCoords);
+    draw(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
 
     document.addEventListener('keydown', function keyHandler (event: any) {
         if (event.defaultPrevented) {
@@ -32,7 +31,7 @@ window.onload = function () {
             if (objectCoords[1] < ROWS) {
                 objectCoords[1]++;
             }
-            draw(map, objectChars, objectCoords);
+            draw(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
             break;
         case 38: // up arrow
         case 75: // k
@@ -40,7 +39,7 @@ window.onload = function () {
             if (objectCoords[1] > 0) {
                 objectCoords[1]--;
             }
-            draw(map, objectChars, objectCoords);
+            draw(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
             break;
         case 37: // left arrow
         case 72: // h
@@ -48,7 +47,7 @@ window.onload = function () {
             if (objectCoords[0] > 0) {
                 objectCoords[0]--;
             }
-            draw(map, objectChars, objectCoords);
+            draw(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
             break;
         case 39: // right arrow
         case 76: // l
@@ -56,7 +55,7 @@ window.onload = function () {
             if (objectCoords[0] < COLUMNS) {
                 objectCoords[0]++;
             }
-            draw(map, objectChars, objectCoords);
+            draw(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
             break;
         default:
             return; // Quit when this doesn't handle the key event.
@@ -71,6 +70,7 @@ window.onload = function () {
     //      DRAW
 };
 
+/* Dependencies: None */
 function makeMap (columns: number, rows: number, bgChar: string): string[] {
     let array: string[] = [];
         for (let i: number = 0; i < (rows * columns); i++) {
@@ -79,19 +79,23 @@ function makeMap (columns: number, rows: number, bgChar: string): string[] {
     return array;
 }
 
-function applyObjects (map: string[], objectChars: string[], objectCoords: number[]): string[] {
+/* Dependencies: None */
+function applyObjects (map: string[], cols: number,
+    objectChars: string[], objectCoords: number[]): string[] {
     // for each game object, place objectChar into map at objectCoord
     let newMap: string[] = map.slice();
     for (let i = 0; i < objectChars.length; i++) {
-        newMap[objectCoords[i*2] + objectCoords[i*2+1] * COLUMNS] = objectChars[i];
+        newMap[objectCoords[i*2] + objectCoords[i*2+1] * cols] = objectChars[i];
     }
     return newMap;
 }
 
-function draw (map: string[], objectChars: string[], objectCoords: number[]) {
+/* Dependencies: function applyObjects */
+function draw (windowId: string, map: string[], cols: number ,
+    objectChars: string[], objectCoords: number[]): void {
     // contentString <- window <- objects <- map
-    let gameWindow = document.getElementById(WINDOW_ID);
-    gameWindow.innerText = applyObjects(map, objectChars, objectCoords)
+    let gameWindow = document.getElementById(windowId);
+    gameWindow.innerText = applyObjects(map, cols, objectChars, objectCoords)
     .reduce((acc: string, val: string) => {
         return acc + val;
     }, '');
