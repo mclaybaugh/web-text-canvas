@@ -21,18 +21,17 @@ as its sprites.
     Because it was better than Grunt and I haven't had the chance
     to try it with Webpack yet.
 
+## TODO
+
+1. Investigate strange right-side behavior with word-wrap, possibly switch to one div per row.
+2. Game loop with background movement/animations
+3. Color output with spans and classes
+4. Additional implementation in Rust/WebAssembly
+
 ## Development Values
 
 1. Do not introduce abstractions until they are needed.
 2. Use pure functions as much as possible.
-
-## TODO
-
-1. Investigate strange right-side behavior with word-wrap,
-possibly switch to one div per row.
-2. Game loop with background movement/animations
-3. Color output with spans and classes
-4. Additional implementation in Rust/WebAssembly
 
 ## Development workflow
 
