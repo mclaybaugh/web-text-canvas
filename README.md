@@ -1,9 +1,40 @@
 # Web Text Game
 
 A web game that uses a div tag as the canvas, and displays text
-as its art assets.
+as its sprites.
 
-## Developers
+## Why did I use [thing]?
+
+1. Typescript
+
+    For documenting types in the code itself instead of in
+    comments. This project would be more at home
+    in a static-typed systems programming language, which
+    is why I am excited to port this to Rust/WebAssembly.
+
+2. Babel
+
+    Mostly for ```const``` and ```let```, although it is also very
+    nice in general to be able to use es6 features where they are
+    appropriate.
+
+3. Gulp
+
+    Because it was better than Grunt and I haven't had the chance
+    to try it with Webpack yet.
+
+## Development Values
+
+1. Do not introduce abstractions until they are needed.
+2. Use pure functions as much as possible.
+
+## TODO
+
+1. Game loop with background movement/animations
+2. Color output with spans and classes
+3. Additional implementation in Rust/WebAssembly
+
+## Development workflow
 
 Use npm to set up project and gulp to run tasks.
 
@@ -20,13 +51,3 @@ gulp clean
 # uglify javascript, for deploying
 gulp build
 ```
-
-## TODO
-
-I am currently working on migrating some my the object oriented pieces
-to a more functional style.
-
-1. Game loop and basic movement controls
-2. Color output with spans and classes
-3. Animations on background
-4. Additional implementation in Rust/WebAssembly
