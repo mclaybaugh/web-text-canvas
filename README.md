@@ -14,9 +14,7 @@ as its sprites.
 
 2. Babel
 
-    Mostly for ```const``` and ```let```, although it is also very
-    nice in general to be able to use es6 features where they are
-    appropriate.
+    Mostly for ```const```, ```let``` and arrow functions.
 
 3. Gulp
 
