@@ -1,6 +1,8 @@
-import { MapChar, Coord, MapObject, Window } from './classes';
-import { FuncMap } from './functionalMap';
+const WINDOW_ID: string = 'game_window';
+const COLUMNS: number = 99;
+const ROWS: number = 26;
 
+/* Colors are not used yet
 const WHITE: string = 'white';
 const RED: string = 'red';
 const BLUE: string = 'blue';
@@ -8,92 +10,85 @@ const GREEN: string = 'green';
 const YELLOW: string = 'yellow';
 const ORANGE: string = 'orange';
 const PURPLE: string = 'purple';
+*/
 
 window.onload = function () {
-    // Configuration vars
-    let windowId: string = 'game_window';
-    let rows: number = 26;
-    let columns: number = 99;
     let bgChar: string = '-';
     let heroChar: string = '@';
-    let heroColor: string = GREEN;
+    let map: string[] = makeMap(COLUMNS, ROWS, bgChar);
+    let objectChars: string[] = [heroChar];
+    let objectCoords: number[] = [0,0];
+    draw(map, objectChars, objectCoords);
 
-    // Interesting logic here
-    // make map and window with same dimensions for now
-    let map: MapChar[] = FuncMap(rows, columns, bgChar);
-    //this.window = new Window(new Coord(), width, height);
-
-    // GAME_OBJECTS
-    let gameObjects: MapObject[] = [];
-    gameObjects.push(new MapObject(
-        new MapChar(heroChar, heroColor), 
-        new Coord()
-    ));
-
-    // FIRST DRAW
-    // contentString <- window <- objects <- map
-    let gameWindow = document.getElementById(windowId);
-    gameWindow.innerText = applyObjects(map, gameObjects)
-        .reduce((acc: string, val: MapChar) => {
-            return acc + val.char;
-        }, '');
-
-    //  SETUP INPUT CONTROLS
-    //document.addEventListener('keydown', this.inputHandler, true)
+    document.addEventListener('keydown', function keyHandler (event: any) {
+        if (event.defaultPrevented) {
+            return; // Do nothing if the event was already processed
+        }
+    
+        switch (event.which) {
+        case 40: // down arrow
+        case 74: // j
+            if (objectCoords[1] < ROWS) {
+                objectCoords[1]++;
+            }
+            draw(map, objectChars, objectCoords);
+            break;
+        case 38: // up arrow
+        case 75: // k
+            if (objectCoords[1] > 0) {
+                objectCoords[1]--;
+            }
+            draw(map, objectChars, objectCoords);
+            break;
+        case 37: // left arrow
+        case 72: // h
+            if (objectCoords[0] > 0) {
+                objectCoords[0]--;
+            }
+            draw(map, objectChars, objectCoords);
+            break;
+        case 39: // right arrow
+        case 76: // l
+            if (objectCoords[0] < COLUMNS) {
+                objectCoords[0]++;
+            }
+            draw(map, objectChars, objectCoords);
+            break;
+        default:
+            return; // Quit when this doesn't handle the key event.
+        }
+    
+        // Cancel the default action to avoid it being handled twice
+        event.preventDefault();
+    }, true);
         
     //  ENTER GAME_LOOP
     //      UPDATE
     //      DRAW
 };
 
-function applyObjects (map: MapChar[], gameObjects: MapObject[]): MapChar[] {
-    // for each gameObject, place into map at object coord
-    for (let i in gameObjects) {
-        map[gameObjects[i].coord.x * gameObjects[i].coord.y] = gameObjects[i].mapChar;
+function makeMap (columns: number, rows: number, bgChar: string): string[] {
+    let array: string[] = [];
+        for (let i: number = 0; i < (rows * columns); i++) {
+            array[i] = bgChar;
+        }
+    return array;
+}
+
+function applyObjects (map: string[], objectChars: string[], objectCoords: number[]): string[] {
+    // for each game object, place objectChar into map at objectCoord
+    let newMap: string[] = map.slice();
+    for (let i = 0; i < objectChars.length; i++) {
+        newMap[objectCoords[i*2] + objectCoords[i*2+1] * COLUMNS] = objectChars[i];
     }
-    return map;
+    return newMap;
 }
 
-function inputHandler (event: {defaultPrevented: any; which: any; 
-    preventDefault: () => void; }) {
-
-    if (event.defaultPrevented) {
-        return; // Do nothing if the event was already processed
-    }
-
-    switch (event.which) {
-    case 40: // down arrow
-    case 74: // j
-        this.move_down();
-        break;
-    case 38: // up arrow
-    case 75: // k
-        this.move_up();
-        break;
-    case 37: // left arrow
-    case 72: // h
-        this.move_left();
-        break;
-    case 39: // right arrow
-    case 76: // l
-        this.move_right();
-        break;
-    default:
-        return; // Quit when this doesn't handle the key event.
-    }
-
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
-}
-
-function move_right(): void {
-}
-
-function move_left(): void {
-}
-
-function move_up(): void {
-}
-
-function move_down(): void {
+function draw (map: string[], objectChars: string[], objectCoords: number[]) {
+    // contentString <- window <- objects <- map
+    let gameWindow = document.getElementById(WINDOW_ID);
+    gameWindow.innerText = applyObjects(map, objectChars, objectCoords)
+    .reduce((acc: string, val: string) => {
+        return acc + val;
+    }, '');
 }
