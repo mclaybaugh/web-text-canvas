@@ -28,9 +28,11 @@ as its sprites.
 
 ## TODO
 
-1. Game loop with background movement/animations
-2. Color output with spans and classes
-3. Additional implementation in Rust/WebAssembly
+1. Investigate strange right-side behavior with word-wrap,
+possibly switch to one div per row.
+2. Game loop with background movement/animations
+3. Color output with spans and classes
+4. Additional implementation in Rust/WebAssembly
 
 ## Development workflow
 
