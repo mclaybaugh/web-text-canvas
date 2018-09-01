@@ -1,9 +1,3 @@
-/*
- * outputing content as one string causes issue with wrap at end of line
- * 
- * Need to output as one div per line
-*/
-
 /* Colors are not used yet
 const WHITE: string = 'white';
 const RED: string = 'red';
@@ -26,11 +20,6 @@ window.onload = function () {
     /* make one div per line */
     let idArray: string[] = addDivRows(WINDOW_ID, ROWS);
 
-    /* 1d */
-    //const map: string[] = makeMap1d(COLUMNS, ROWS, bgChar);
-    //draw1d(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
-
-    /* 2d */
     const map: any[] = makeMap2d(COLUMNS, ROWS, bgChar);
     draw2dMultiDivs(idArray, map, objectChars, objectCoords);
 
@@ -46,9 +35,6 @@ window.onload = function () {
             if (objectCoords[0] < ROWS - 1) {
                 objectCoords[0]++;
             }
-            /* 1d */
-            //draw1d(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
-            /* 2d */
             draw2dMultiDivs(idArray, map, objectChars, objectCoords);
             break;
         case 38: // up arrow
@@ -57,9 +43,6 @@ window.onload = function () {
             if (objectCoords[0] > 0) {
                 objectCoords[0]--;
             }
-            /* 1d */
-            //draw1d(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
-            /* 2d */
             draw2dMultiDivs(idArray, map, objectChars, objectCoords);
             break;
         case 37: // left arrow
@@ -68,9 +51,6 @@ window.onload = function () {
             if (objectCoords[1] > 0) {
                 objectCoords[1]--;
             }
-            /* 1d */
-            //draw1d(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
-            /* 2d */
             draw2dMultiDivs(idArray, map, objectChars, objectCoords);
             break;
         case 39: // right arrow
@@ -79,9 +59,6 @@ window.onload = function () {
             if (objectCoords[1] < COLUMNS - 1) {
                 objectCoords[1]++;
             }
-            /* 1d */
-            //draw1d(WINDOW_ID, map, COLUMNS, objectChars, objectCoords);
-            /* 2d */
             draw2dMultiDivs(idArray, map, objectChars, objectCoords);
             break;
         default:
@@ -108,14 +85,6 @@ function makeMap2d (cols: number, rows: number, bgChar: string): any[] {
     return array;
 }
 
-function makeMap1d (cols: number, rows: number, bgChar: string): string[] {
-    let map: string[] = [];
-    for (let i = 0; i < cols * rows; i++) {
-        map[i] = bgChar;
-    }
-    return map;
-}
-
 function applyObjects2d (map: any[], objectChars: string[], objectCoords: number[]): any[] {
     // copy 2d array
     let newMap: any[] = [];
@@ -126,15 +95,6 @@ function applyObjects2d (map: any[], objectChars: string[], objectCoords: number
     // insert objects
     for (let i = 0; i < objectChars.length; i++) {
         newMap[objectCoords[i*2]][objectCoords[i*2+1]] = objectChars[i];
-    }
-    return newMap;
-}
-
-function applyObjects1d (map: string[], cols: number, objectChars: string[], objectCoords: number[]): string[] {
-    let newMap = map.slice();
-
-    for (let i = 0; i < objectChars.length; i++) {
-        newMap[objectCoords[i*2] * cols + objectCoords[i*2+1]] = objectChars[i];
     }
     return newMap;
 }
@@ -162,12 +122,4 @@ function draw2dMultiDivs (idArray: string[], map: any[], objectChars: string[], 
                 return acc + val;
             }, '');
     }
-}
-
-function draw1d (windowId: string, map: string[], cols: number, objectChars: string[], objectCoords: number[]): void {
-    let gameWindow = document.getElementById(windowId);
-    gameWindow.innerText = applyObjects1d(map, cols, objectChars, objectCoords).reduce(
-        (acc: string, val: string) => {
-            return acc + val;
-        }, '');
 }
