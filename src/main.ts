@@ -85,7 +85,7 @@ function makeMap (cols: number, rows: number, bgChar: string): any[] {
     return array;
 }
 
-function applyObjects2d (map: any[], objectChars: string[], objectCoords: number[]): any[] {
+function applyObjects (map: any[], objectChars: string[], objectCoords: number[]): any[] {
     // copy 2d array
     let newMap: any[] = [];
     for (let i = 0; i < map.length; i++) {
@@ -113,7 +113,7 @@ function addDivRows (windowId: string, rows: number): string[] {
 
 function draw (idArray: string[], map: any[], objectChars: string[], objectCoords: number[]): void {
     // contentString <- window <- objects <- map
-    let mapToDraw = applyObjects2d(map, objectChars, objectCoords);
+    let mapToDraw = applyObjects(map, objectChars, objectCoords);
 
     for (let i = 0; i < idArray.length; i++) {
         let div = document.getElementById(idArray[i]);
