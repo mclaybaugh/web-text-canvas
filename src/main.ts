@@ -20,8 +20,8 @@ window.onload = function () {
     /* make one div per line */
     let idArray: string[] = addDivRows(WINDOW_ID, ROWS);
 
-    const map: any[] = makeMap2d(COLUMNS, ROWS, bgChar);
-    draw2dMultiDivs(idArray, map, objectChars, objectCoords);
+    const map: any[] = makeMap(COLUMNS, ROWS, bgChar);
+    draw(idArray, map, objectChars, objectCoords);
 
     document.addEventListener('keydown', function keyHandler (event: any) {
         if (event.defaultPrevented) {
@@ -35,7 +35,7 @@ window.onload = function () {
             if (objectCoords[0] < ROWS - 1) {
                 objectCoords[0]++;
             }
-            draw2dMultiDivs(idArray, map, objectChars, objectCoords);
+            draw(idArray, map, objectChars, objectCoords);
             break;
         case 38: // up arrow
         case 75: // k
@@ -43,7 +43,7 @@ window.onload = function () {
             if (objectCoords[0] > 0) {
                 objectCoords[0]--;
             }
-            draw2dMultiDivs(idArray, map, objectChars, objectCoords);
+            draw(idArray, map, objectChars, objectCoords);
             break;
         case 37: // left arrow
         case 72: // h
@@ -51,7 +51,7 @@ window.onload = function () {
             if (objectCoords[1] > 0) {
                 objectCoords[1]--;
             }
-            draw2dMultiDivs(idArray, map, objectChars, objectCoords);
+            draw(idArray, map, objectChars, objectCoords);
             break;
         case 39: // right arrow
         case 76: // l
@@ -59,7 +59,7 @@ window.onload = function () {
             if (objectCoords[1] < COLUMNS - 1) {
                 objectCoords[1]++;
             }
-            draw2dMultiDivs(idArray, map, objectChars, objectCoords);
+            draw(idArray, map, objectChars, objectCoords);
             break;
         default:
             return; // Quit when this doesn't handle the key event.
@@ -74,7 +74,7 @@ window.onload = function () {
     //      DRAW
 };
 
-function makeMap2d (cols: number, rows: number, bgChar: string): any[] {
+function makeMap (cols: number, rows: number, bgChar: string): any[] {
     let array: any[] = [];
     for (let i = 0; i < rows; i++) {
         array[i] = [];
@@ -111,7 +111,7 @@ function addDivRows (windowId: string, rows: number): string[] {
     return idArray;
 }
 
-function draw2dMultiDivs (idArray: string[], map: any[], objectChars: string[], objectCoords: number[]): void {
+function draw (idArray: string[], map: any[], objectChars: string[], objectCoords: number[]): void {
     // contentString <- window <- objects <- map
     let mapToDraw = applyObjects2d(map, objectChars, objectCoords);
 
