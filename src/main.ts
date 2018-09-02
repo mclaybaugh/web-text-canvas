@@ -18,7 +18,7 @@ window.onload = function () {
     let objectCoords: number[] = [0,0];
 
     /* make one div per line */
-    let idArray: string[] = addDivRows(WINDOW_ID, ROWS);
+    let idArray: any[] = addDivRows(WINDOW_ID, ROWS, COLUMNS);
 
     const map: any[] = makeMap(COLUMNS, ROWS, bgChar);
     draw(idArray, map, objectChars, objectCoords);
@@ -99,27 +99,33 @@ function applyObjects (map: any[], objectChars: string[], objectCoords: number[]
     return newMap;
 }
 
-function addDivRows (windowId: string, rows: number): string[] {
-    let idArray: string[] = [];
-    let gameWindow = document.getElementById(windowId);
+function addDivRows (windowId: string, rows: number, cols: number): any[] {
+    let idArray: any[] = [];
+
     for (let i = 0; i < rows; i++) {
-        idArray[i] = 'row' + String(i);
+        idArray[i] = [];
         let div = document.createElement('div');
-        div.setAttribute('id', idArray[i]);
+
+        for (let j = 0; j < cols; j++) {
+            idArray[i][j] = 'row' + String(i) + 'col' + String(j);
+            let span = document.createElement('span');
+            span.setAttribute('id', idArray[i][j]);
+            div.appendChild(span);
+        }
+
+        let gameWindow = document.getElementById(windowId);
         gameWindow.appendChild(div);
     }
     return idArray;
 }
 
-function draw (idArray: string[], map: any[], objectChars: string[], objectCoords: number[]): void {
-    // contentString <- window <- objects <- map
+function draw (idArray: any[], map: any[], objectChars: string[], objectCoords: number[]): void {
     let mapToDraw = applyObjects(map, objectChars, objectCoords);
 
     for (let i = 0; i < idArray.length; i++) {
-        let div = document.getElementById(idArray[i]);
-        div.innerText = mapToDraw[i].reduce(
-            (acc: string, val: string) => {
-                return acc + val;
-            }, '');
+        for (let j = 0; j < idArray[i].length; j++) {
+            let span = document.getElementById(idArray[i][j]);
+            span.innerText = mapToDraw[i][j];
+        }
     }
 }
