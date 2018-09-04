@@ -23,8 +23,9 @@ as its sprites.
 
 ## TODO
 
-1. Menus
-2. Larger text (drawn using characters)
+1. Multi-char objects
+2. Menus
+3. Larger text (drawn using characters)
 
 Games to implement:
 
