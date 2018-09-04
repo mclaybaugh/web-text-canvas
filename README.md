@@ -23,10 +23,16 @@ as its sprites.
 
 ## TODO
 
-1. Investigate strange right-side behavior with word-wrap, possibly switch to one div per row.
-2. Game loop with background movement/animations
-3. Color output with spans and classes
-4. Additional implementation in Rust/WebAssembly
+1. Menus
+2. Larger text (drawn using characters)
+
+Games to implement:
+
+1. Snake
+    1. Sound effects
+    2. Animations (game end)
+2. Space Ship/Asteroid game
+    1. Simple physics
 
 ## Development Values
 
