@@ -46,15 +46,9 @@ function applySprites (map: any[], sprites: Sprite[]): any[] {
     }
 
     for (let i = 0; i < sprites.length; i++) {
-        if (sprites[i].colorCharArray[0].length == 1) {
-            // 1D sprite, each item in array is in same row
-            for (let j = 0; j < sprites[i].colorCharArray.length; j++) {
-                newMap[sprites[i].coord.row][sprites[i].coord.col + j] = sprites[i].colorCharArray[j];
-            }
-        } else {
-            // 2D sprite
-            for (let j = 0; j < sprites[i].colorCharArray.length; j++) {
-                for (let k = 0; k < sprites[i].colorCharArray[j].length; k++) {
+        for (let j = 0; j < sprites[i].colorCharArray.length; j++) {
+            for (let k = 0; k < sprites[i].colorCharArray[j].length; k++) {
+                if (sprites[i].colorCharArray[j][k] !== '') {
                     newMap[sprites[i].coord.row + j][sprites[i].coord.col + k] = sprites[i].colorCharArray[j][k];
                 }
             }
