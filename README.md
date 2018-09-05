@@ -26,6 +26,8 @@ as its sprites.
 1. Multi-char objects
 2. Menus
 3. Larger text (drawn using characters)
+4. Game loop
+5. Animations
 
 Games to implement:
 
