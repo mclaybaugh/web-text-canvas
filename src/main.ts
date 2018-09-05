@@ -1,4 +1,4 @@
-import { ColorChar, Coord, MapObject, makeMap, draw, insertDivsSpans } from './map'
+import { ColorChar, Coord, Sprite, makeMap, draw, insertDivsSpans } from './map'
 
 const WHITE: string = 'white';
 const RED: string = 'red';
@@ -15,21 +15,27 @@ window.onload = function () {
 
 
     const bgChar: string = '-';
-    const heroChar: string = '@';
-    let objects: MapObject[] = [new MapObject(
-        new ColorChar(heroChar, GREEN), 
+    const heroArray: any[] = [[
+        new ColorChar('@', RED), 
+        new ColorChar('A', BLUE)
+    ],[
+        new ColorChar('Q', GREEN)
+    ]];
+
+    let sprites: Sprite[] = [new Sprite(
+        heroArray, 
         new Coord()
     )];
 
     let idArray: any[] = insertDivsSpans(WINDOW_ID, ROWS, COLS);
     const map: any[] = makeMap(COLS, ROWS, bgChar);
-    draw(idArray, map, objects);
+    draw(idArray, map, sprites);
 
-    document.addEventListener('keydown', function keyHandler (event: any) {
+    /*document.addEventListener('keydown', function keyHandler (event: any) {
         if (event.defaultPrevented) {
             return; // Do nothing if the event was already processed
         }
-    
+
         switch (event.which) {
         case 40: // down arrow
         case 74: // j
@@ -66,11 +72,11 @@ window.onload = function () {
         default:
             return; // Quit when this doesn't handle the key event.
         }
-    
+
         // Cancel the default action to avoid it being handled twice
         event.preventDefault();
-    }, true);
-        
+    }, true);*/
+
     //  ENTER GAME_LOOP
     //      UPDATE
     //      DRAW

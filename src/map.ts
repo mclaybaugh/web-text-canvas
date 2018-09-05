@@ -18,12 +18,12 @@ class Coord {
     }
 }
 
-class MapObject {
-    public colorChar: ColorChar;
+class Sprite {
+    public colorCharArray: any[];
     public coord: Coord;
 
-    constructor (colorChar: ColorChar, coord: Coord) {
-        this.colorChar = colorChar;
+    constructor (colorCharArray: any[], coord: Coord) {
+        this.colorCharArray = colorCharArray;
         this.coord = coord;
     }
 }
@@ -39,19 +39,32 @@ function makeMap (cols: number, rows: number, bgChar: string): any[] {
     return array;
 }
 
-function applyObjects (map: any[], objects: MapObject[]): any[] {
+function applySprites (map: any[], sprites: Sprite[]): any[] {
     let newMap: any[] = [];
     for (let i = 0; i < map.length; i++) {
         newMap[i] = map[i].slice();
     }
-    for (let i = 0; i < objects.length; i++) {
-        newMap[objects[i].coord.row][objects[i].coord.col] = objects[i].colorChar;
+
+    for (let i = 0; i < sprites.length; i++) {
+        if (sprites[i].colorCharArray[0].length == 1) {
+            // 1D sprite, each item in array is in same row
+            for (let j = 0; j < sprites[i].colorCharArray.length; j++) {
+                newMap[sprites[i].coord.row][sprites[i].coord.col + j] = sprites[i].colorCharArray[j];
+            }
+        } else {
+            // 2D sprite
+            for (let j = 0; j < sprites[i].colorCharArray.length; j++) {
+                for (let k = 0; k < sprites[i].colorCharArray[j].length; k++) {
+                    newMap[sprites[i].coord.row + j][sprites[i].coord.col + k] = sprites[i].colorCharArray[j][k];
+                }
+            }
+        }
     }
     return newMap;
 }
 
-function draw (idArray: any[], map: any[], objects: MapObject[]): void {
-    let mapToDraw = applyObjects(map, objects);
+function draw (idArray: any[], map: any[], sprites: Sprite[]): void {
+    let mapToDraw = applySprites(map, sprites);
     for (let i = 0; i < idArray.length; i++) {
         for (let j = 0; j < idArray[i].length; j++) {
             let span = document.getElementById(idArray[i][j]);
@@ -77,4 +90,4 @@ function insertDivsSpans (windowId: string, rows: number, cols: number): any[] {
     return idArray;
 }
 
-export { ColorChar, Coord, MapObject, makeMap, draw, insertDivsSpans }
+export { ColorChar, Coord, Sprite, makeMap, draw, insertDivsSpans }
