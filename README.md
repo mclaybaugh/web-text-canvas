@@ -23,19 +23,11 @@ as its sprites.
 
 ## TODO
 
-1. Multi-char objects
-2. Menus
-3. Larger text (drawn using characters)
-4. Game loop
-5. Animations
-
-Games to implement:
-
-1. Snake
-    1. Sound effects
-    2. Animations (game end)
-2. Space Ship/Asteroid game
-    1. Simple physics
+1. Collision detection
+2. Animations
+3. Menus
+4. Larger text (drawn using characters)
+5. Game loop
 
 ## Development Values
 
