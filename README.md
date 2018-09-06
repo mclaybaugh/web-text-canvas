@@ -21,9 +21,9 @@ as its sprites.
 
 1. Collision detection
 2. Animations
-3. Menus
-4. Larger text (drawn using characters)
-5. Game loop
+3. Game loop
+4. Menus, and a mode system to switch controllers (event handlers)
+5. Larger text (drawn using characters)
 
 ## Development Values
 
