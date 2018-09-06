@@ -11,21 +11,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mclaybaugh/web-text-game"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0-rc.4",
-    "babelify": "^9.0.0",
-    "browserify": "^16.2.2",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^8.0.0-beta.2",
-    "gulp-csso": "^3.0.1",
-    "gulp-sass": "^4.0.1",
-    "gulp-streamify": "^1.0.2",
-    "gulp-uglify": "^3.0.1",
-    "tsify": "^4.0.0",
-    "typescript": "^3.0.1",
-    "vinyl-source-stream": "^2.0.0"
   }
 }
