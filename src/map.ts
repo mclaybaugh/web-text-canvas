@@ -48,7 +48,8 @@ function applySprites (map: any[], sprites: Sprite[]): any[] {
     for (let i = 0; i < sprites.length; i++) {
         for (let j = 0; j < sprites[i].colorCharArray.length; j++) {
             for (let k = 0; k < sprites[i].colorCharArray[j].length; k++) {
-                if (sprites[i].colorCharArray[j][k] !== '') {
+                if (sprites[i].colorCharArray[j][k] !== ''
+                    && (sprites[i].coord.row + j) < newMap.length) {
                     newMap[sprites[i].coord.row + j][sprites[i].coord.col + k] = sprites[i].colorCharArray[j][k];
                 }
             }

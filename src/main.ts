@@ -14,18 +14,18 @@ window.onload = function () {
     const COLS: number = 99;
 
 
-    const bgChar: string = '-';
+    const bgChar: string = String.fromCharCode(160);
     const heroArray: any[] = [[
         new ColorChar('@', RED),
-        new ColorChar('@', RED),
-        new ColorChar('@', RED)
+        new ColorChar('@', WHITE),
+        new ColorChar('@', BLUE)
     ],[
-        new ColorChar('@', RED),
+        new ColorChar('@', GREEN),
         '',
-        new ColorChar('@', RED),
+        new ColorChar('@', YELLOW),
     ],[
-        new ColorChar('@', RED),
-        new ColorChar('@', RED),
+        new ColorChar('@', ORANGE),
+        new ColorChar('@', PURPLE),
         new ColorChar('@', RED)
     ]];
 
