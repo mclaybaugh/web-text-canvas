@@ -105,7 +105,7 @@ window.onload = function () {
     ]];
 
     let sprites = [new Sprite(
-        heroArray, 
+        heroArray,
         new Coord()
     )];
 
