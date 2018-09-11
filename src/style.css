@@ -1,20 +1,8 @@
-:root {
-    --bg-color: rgb(43, 40, 40);
-    --text-color: rgb(175, 169, 169);
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(43, 40, 40);
 }
-
-#game_window {
-    width: 60em;
-    height: 30em;
-    margin: 0 auto;
-    padding: 1em;
-    border-radius: 10px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: monospace;
-    word-wrap: break-word;
-}
-
 /* Color classes to be added to text dynamically */
 .white {
     color: white;
