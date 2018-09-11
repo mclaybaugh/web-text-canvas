@@ -5,11 +5,12 @@ as its sprites.
 
 ## TODO
 
-1. Collision detection
-2. Animations
-3. Game loop
-4. Menus, and a mode system to switch controllers (event handlers)
-5. Larger text (drawn using characters)
+1. Full screen
+2. Menu
+    a. Larger text
+    b. Touch events
+3. Floaty block game
+    a. Collision detection
 
 ## Development Values
 
