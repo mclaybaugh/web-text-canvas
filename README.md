@@ -5,11 +5,10 @@ as its sprites.
 
 ## TODO
 
-1. Full screen
-2. Menu
+1. Menu
     a. Larger text
     b. Touch events
-3. Floaty block game
+2. Floaty block game
     a. Collision detection
 
 ## Development Values
