@@ -1,7 +1,6 @@
-# Web Text Game
+# Colchar
 
-A web game that uses a div tag as the canvas, and displays text
-as its sprites.
+A rendering engine that draws unicode characters in a block element.
 
 ## Development Values
 
