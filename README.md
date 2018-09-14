@@ -1,6 +1,6 @@
-# Colchar
+# web-text-engine
 
-A rendering engine that draws unicode characters in a block element.
+A rendering engine that draws unicode characters to spans in a block element.
 
 ## Development Values
 
