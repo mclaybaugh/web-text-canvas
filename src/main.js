@@ -7,10 +7,12 @@ const ORANGE = 'orange';
 const PURPLE = 'purple';
 
 /* Map */
-function ColorChar (char, color) {
+function Pixel (char, color, bgColor) {
     if (typeof color === 'undefined') color = '';
+    if (typeof bgColor === 'undefined') bgColor = '';
     this.char = char;
     this.color = color;
+    this.bgColor = bgColor;
 }
 
 function Coord (row, col) {
@@ -20,17 +22,17 @@ function Coord (row, col) {
     this.col = col;
 }
 
-function Sprite (colorCharArray, coord) {
-    this.colorCharArray = colorCharArray;
+function Sprite (pixels, coord) {
+    this.pixels = pixels;
     this.coord = coord;
 }
 
-function makeMap (cols, rows, bgChar) {
+function makeMap (cols, rows, defaultChar) {
     let array = [];
     for (let i = 0; i < rows; i++) {
         array[i] = [];
         for (let j = 0; j < cols; j++) {
-            array[i][j] = new ColorChar(bgChar);
+            array[i][j] = new Pixel(defaultChar);
         }
     }
     return array;
@@ -43,11 +45,13 @@ function applySprites (map, sprites) {
     }
 
     for (let i = 0; i < sprites.length; i++) {
-        for (let j = 0; j < sprites[i].colorCharArray.length; j++) {
-            for (let k = 0; k < sprites[i].colorCharArray[j].length; k++) {
-                if (sprites[i].colorCharArray[j][k] !== ''
+        for (let j = 0; j < sprites[i].pixels.length; j++) {
+            for (let k = 0; k < sprites[i].pixels[j].length; k++) {
+                if (sprites[i].pixels[j][k] !== ''
                     && (sprites[i].coord.row + j) < newMap.length) {
-                    newMap[sprites[i].coord.row + j][sprites[i].coord.col + k] = sprites[i].colorCharArray[j][k];
+                    let row = sprites[i].coord.row + j;
+                    let col = sprites[i].coord.col + k;
+                    newMap[row][col] = sprites[i].pixels[j][k];
                 }
             }
         }
@@ -55,11 +59,11 @@ function applySprites (map, sprites) {
     return newMap;
 }
 
-function draw (idArray, map, sprites) {
+function draw (ids, map, sprites) {
     let mapToDraw = applySprites(map, sprites);
-    for (let i = 0; i < idArray.length; i++) {
-        for (let j = 0; j < idArray[i].length; j++) {
-            let span = document.getElementById(idArray[i][j]);
+    for (let i = 0; i < ids.length; i++) {
+        for (let j = 0; j < ids[i].length; j++) {
+            let span = document.getElementById(ids[i][j]);
             span.innerText = mapToDraw[i][j].char;
             span.className = mapToDraw[i][j].color;
         }
@@ -67,19 +71,19 @@ function draw (idArray, map, sprites) {
 }
 
 function insertDivsSpans (windowId, rows, cols) {
-    let idArray = [];
+    let ids = [];
     for (let i = 0; i < rows; i++) {
-        idArray[i] = [];
+        ids[i] = [];
         let div = document.createElement('div');
         for (let j = 0; j < cols; j++) {
-            idArray[i][j] = 'row' + String(i) + 'col' + String(j);
+            ids[i][j] = 'row' + String(i) + 'col' + String(j);
             let span = document.createElement('span');
-            span.setAttribute('id', idArray[i][j]);
+            span.setAttribute('id', ids[i][j]);
             div.appendChild(span);
         }
         document.getElementById(windowId).appendChild(div);
     }
-    return idArray;
+    return ids;
 }
 
 function styleGameWindow (windowId) {
@@ -93,8 +97,10 @@ function styleGameWindow (windowId) {
     gameWindow.style.backgroundColor = 'rgb(43, 40, 40)';
     gameWindow.style.color = 'rgb(175, 169, 169)';
     gameWindow.style.fontFamily = 'Courier, monospace';
-    const rows = height / 18 - 1;
-    const cols = width / 10 + 3;
+    const fontSize = 14;
+    gameWindow.style.fontSize = fontSize + 'pt';
+    const rows = height / (fontSize + 9);
+    const cols = width / (fontSize - 2) + 5;
     return {
         'rows': rows,
         'cols': cols
@@ -103,17 +109,17 @@ function styleGameWindow (windowId) {
 
 function getHero () {
     return [[
-        new ColorChar('@', RED),
-        new ColorChar('@', WHITE),
-        new ColorChar('@', BLUE)
+        new Pixel('@', RED),
+        new Pixel('@', WHITE),
+        new Pixel('@', BLUE)
     ],[
-        new ColorChar('@', GREEN),
+        new Pixel('@', GREEN),
         '',
-        new ColorChar('@', YELLOW),
+        new Pixel('@', YELLOW),
     ],[
-        new ColorChar('@', ORANGE),
-        new ColorChar('@', PURPLE),
-        new ColorChar('@', RED)
+        new Pixel('@', ORANGE),
+        new Pixel('@', PURPLE),
+        new Pixel('@', RED)
     ]];
 }
 /* Main */
@@ -121,7 +127,7 @@ window.onload = function () {
     const WINDOW_ID = 'game_window';
     const dimensions = styleGameWindow(WINDOW_ID);
 
-    const bgChar = '-';
+    const defaultChar = '-';
     const heroArray = getHero();
 
     let sprites = [new Sprite(
@@ -129,9 +135,9 @@ window.onload = function () {
         new Coord()
     )];
 
-    let idArray = insertDivsSpans(WINDOW_ID, dimensions.rows, dimensions.cols);
-    const map = makeMap(dimensions.cols, dimensions.rows, bgChar);
-    draw(idArray, map, sprites);
+    let ids = insertDivsSpans(WINDOW_ID, dimensions.rows, dimensions.cols);
+    const map = makeMap(dimensions.cols, dimensions.rows, defaultChar);
+    draw(ids, map, sprites);
 
     document.addEventListener('keydown', function keyHandler (event) {
         if (event.defaultPrevented) {
@@ -145,7 +151,7 @@ window.onload = function () {
             if (sprites[0].coord.row < dimensions.rows - 1) {
                 sprites[0].coord.row++;
             }
-            draw(idArray, map, sprites);
+            draw(ids, map, sprites);
             break;
         case 38: // up arrow
         case 75: // k
@@ -153,7 +159,7 @@ window.onload = function () {
             if (sprites[0].coord.row > 0) {
                 sprites[0].coord.row--;
             }
-            draw(idArray, map, sprites);
+            draw(ids, map, sprites);
             break;
         case 37: // left arrow
         case 72: // h
@@ -161,7 +167,7 @@ window.onload = function () {
             if (sprites[0].coord.col > 0) {
                 sprites[0].coord.col--;
             }
-            draw(idArray, map, sprites);
+            draw(ids, map, sprites);
             break;
         case 39: // right arrow
         case 76: // l
@@ -169,7 +175,7 @@ window.onload = function () {
             if (sprites[0].coord.col < dimensions.cols - 1) {
                 sprites[0].coord.col++;
             }
-            draw(idArray, map, sprites);
+            draw(ids, map, sprites);
             break;
         default:
             return; // Quit when this doesn't handle the key event.
