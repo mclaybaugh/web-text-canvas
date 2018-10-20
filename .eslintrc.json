@@ -1,0 +1,16 @@
+{
+    "env": {
+        "browser": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "rules": {
+        "indent": ["error", 2],
+        "quotes": ["warn", "single"],
+        "semi": ["error", "always"],
+        "no-undef": "warn",
+        "no-trailing-spaces": "error"
+    }
+}
