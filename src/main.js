@@ -60,12 +60,18 @@ function applySprites (
 
   for (let i = 0; i < sprites.length; i++) {
     for (let j = 0; j < sprites[i].pixels.length; j++) {
-      for (let k = 0; k < sprites[i].pixels[j].length; k++) {
-        if (sprites[i].pixels[j][k] !== ''
-            && (sprites[i].coord.row + j) < newMap.length) {
-          let row = sprites[i].coord.row + j;
-          let col = sprites[i].coord.col + k;
-          newMap[row][col] = sprites[i].pixels[j][k];
+      if (sprites[i].pixels[j].length == undefined) {
+        let row = sprites[i].coord.row + j;
+        let col = sprites[i].coord.col;
+        newMap[col][row] = sprites[i].pixels[j];
+      } else {
+        for (let k = 0; k < sprites[i].pixels[j].length; k++) {
+          if (sprites[i].pixels[j][k] !== ''
+              && (sprites[i].coord.row + j) < newMap.length) {
+            let row = sprites[i].coord.row + j;
+            let col = sprites[i].coord.col + k;
+            newMap[row][col] = sprites[i].pixels[j][k];
+          }
         }
       }
     }
@@ -127,6 +133,131 @@ function styleFullWindow (/** @type {string} */ windowId) {
   };
 }
 
+// Progress bar
+function make_progress_bar (
+  /** @type {number} */ size,
+  /** @type {number} */ status,
+  /** @type {Coord} */ location) {
+  let pixels = [];
+  for (let i = 0; i < status; i++) {
+    pixels[i] = new Pixel('#', GREEN);
+  }
+  for (let j = status; j < size; j++) {
+    pixels[j] = new Pixel(String.fromCharCode(160));
+  }
+
+  return new Sprite(
+    pixels,
+    location
+  );
+}
+
+// Main
+window.onload = function () {
+  const WINDOW_ID = 'game_window';
+  const dimensions = styleFullWindow(WINDOW_ID);
+
+  // nonblank space String.fromCharCode(160);
+  const defaultChar = '-';
+  // const heroArray = getHero();
+
+  // let sprites = [new Sprite(
+  //   heroArray,
+  //   new Coord()
+  // )];
+
+  let ids = insertDivsSpans(WINDOW_ID, dimensions.rows, dimensions.cols);
+  const map = makeMap(dimensions.cols, dimensions.rows, defaultChar);
+  // draw(ids, map, sprites);
+
+  let psize = 20;
+  let pstatus = 0;
+  let pcoord = new Coord(20, 20);
+  let sprites = [make_progress_bar(psize, pstatus, pcoord)];
+  draw(ids, map, sprites);
+  setInterval(function () {
+    if (pstatus == 20) {
+      pstatus = 0;
+    }
+    sprites[0] = make_progress_bar(psize, pstatus++, pcoord);
+    draw(ids, map, sprites);
+  }, 500);
+  //document.addEventListener('keydown', , true);
+
+  //  ENTER GAME_LOOP
+  //      UPDATE
+  //      DRAW
+};
+
+function keyHandler (event) {
+  if (event.defaultPrevented) {
+    return; // Do nothing if the event was already processed
+  }
+
+  switch (event.which) {
+  case 40: // down arrow
+  case 74: // j
+  case 83: // s
+    if (sprites[0].coord.row < dimensions.rows - 1) {
+      sprites[0].coord.row++;
+    }
+    draw(ids, map, sprites);
+    break;
+  case 38: // up arrow
+  case 75: // k
+  case 87: // w
+    if (sprites[0].coord.row > 0) {
+      sprites[0].coord.row--;
+    }
+    draw(ids, map, sprites);
+    break;
+  case 37: // left arrow
+  case 72: // h
+  case 65: // a
+    if (sprites[0].coord.col > 0) {
+      sprites[0].coord.col--;
+    }
+    draw(ids, map, sprites);
+    break;
+  case 39: // right arrow
+  case 76: // l
+  case 68: // d
+    if (sprites[0].coord.col < dimensions.cols - 1) {
+      sprites[0].coord.col++;
+    }
+    draw(ids, map, sprites);
+    break;
+  default:
+    return; // Quit when this doesn't handle the key event.
+  }
+
+  // Cancel the default action to avoid it being handled twice
+  event.preventDefault();
+}
+
+// Menu setup
+class MenuLink {
+  constructor (
+    /** @type {string} */ text,
+    /** @type {string} */ url) {
+    this.text = text;
+    this.url = url;
+  }
+}
+
+const home = new MenuLink(
+  'Home',
+  '/'
+);
+const github = new MenuLink(
+  'Check out my code on GitHub',
+  'https://github.com/mclaybaugh'
+);
+const twitter = new MenuLink(
+  'Follow me on Twitter',
+  'https://twitter.com/michaelclaybaug'
+);
+
 // Sprites
 function getHero () {
   return [[
@@ -143,120 +274,3 @@ function getHero () {
     new Pixel('@', RED)
   ]];
 }
-// Progress bar
-class progressBar {
-  constructor (/** @type {number} */ size) {
-    let pixels = [];
-    for (let i = 0; i < size; i++) {
-      pixels[i] = new Pixel('-');
-    }
-    this.sprite = new Sprite(
-      pixels,
-      new Coord(20, 20)
-    );
-    this.status = 0;
-    this.size = size;
-  }
-
-  increment () {
-    if (this.status == 99) {
-      this.status = 0;
-    } else {
-      this.status++;
-    }
-    let pixels = [];
-    for (let i = 0; i < this.size; i++) {
-
-    }
-  }
-}
-
-// My Menu
-function MenuLink (
-  /** @type {} */ text,
-  /** @type {} */ url) {
-  this.text = text;
-  this.url = url;
-}
-
-const home = new MenuLink(
-  'Home',
-  '/'
-);
-const github = new MenuLink(
-  'Check out my code on GitHub',
-  'https://github.com/mclaybaugh'
-);
-const twitter = new MenuLink(
-  'Follow me on Twitter',
-  'https://twitter.com/michaelclaybaug'
-);
-
-// Main
-window.onload = function () {
-  const WINDOW_ID = 'game_window';
-  const dimensions = styleFullWindow(WINDOW_ID);
-
-  // nonblank space String.fromCharCode(160);
-  const defaultChar = '-';
-  const heroArray = getHero();
-
-  let sprites = [new Sprite(
-    heroArray,
-    new Coord()
-  )];
-
-  let ids = insertDivsSpans(WINDOW_ID, dimensions.rows, dimensions.cols);
-  const map = makeMap(dimensions.cols, dimensions.rows, defaultChar);
-  draw(ids, map, sprites);
-
-  document.addEventListener('keydown', function keyHandler (event) {
-    if (event.defaultPrevented) {
-      return; // Do nothing if the event was already processed
-    }
-
-    switch (event.which) {
-    case 40: // down arrow
-    case 74: // j
-    case 83: // s
-      if (sprites[0].coord.row < dimensions.rows - 1) {
-        sprites[0].coord.row++;
-      }
-      draw(ids, map, sprites);
-      break;
-    case 38: // up arrow
-    case 75: // k
-    case 87: // w
-      if (sprites[0].coord.row > 0) {
-        sprites[0].coord.row--;
-      }
-      draw(ids, map, sprites);
-      break;
-    case 37: // left arrow
-    case 72: // h
-    case 65: // a
-      if (sprites[0].coord.col > 0) {
-        sprites[0].coord.col--;
-      }
-      draw(ids, map, sprites);
-      break;
-    case 39: // right arrow
-    case 76: // l
-    case 68: // d
-      if (sprites[0].coord.col < dimensions.cols - 1) {
-        sprites[0].coord.col++;
-      }
-      draw(ids, map, sprites);
-      break;
-    default:
-      return; // Quit when this doesn't handle the key event.
-    }
-
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
-  }, true);
-
-  //  ENTER GAME_LOOP
-  //      UPDATE
-  //      DRAW
-};
