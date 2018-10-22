@@ -6,7 +6,7 @@ const YELLOW = 'yellow';
 const ORANGE = 'orange';
 const PURPLE = 'purple';
 
-// Map
+// Canvas
 class Pixel {
   constructor (
     /** @type {string} */ char,
@@ -182,14 +182,16 @@ window.onload = function () {
     sprites[0] = make_progress_bar(psize, pstatus++, pcoord);
     draw(ids, map, sprites);
   }, 500);
-  //document.addEventListener('keydown', , true);
+  // document.addEventListener('keydown', function (event) {
+  //   keyHandler(event, ids, map, sprites, dimensions);
+  // }, true);
 
   //  ENTER GAME_LOOP
   //      UPDATE
   //      DRAW
 };
 
-function keyHandler (event) {
+function keyHandler (event, ids, map, sprites, dimensions) {
   if (event.defaultPrevented) {
     return; // Do nothing if the event was already processed
   }
